@@ -1,0 +1,12 @@
+public Id insertStudent(String name, String email) {
+    apxio__Student__c student = new apxio__Student__c(
+        Name = name, 
+        apxio__Email__c = email
+    );
+
+    if (Schema.sObjectType.apxio__Student__c.isCreateable()) {
+        insert as user student;
+    }
+
+    return student.Id;
+}
