@@ -1,11 +1,24 @@
 public static List<Integer> squareList(List<Integer> nums){
-    List<Integer> squareNumbers = new List<Integer>();
+    List<Integer> squareNumbers = new List<Integer>(nums.size());
+    Integer leftIndex = 0;
+    Integer rightIndex = nums.size() - 1;
+    Integer highestIndex = nums.size() - 1;
 
-    for (Integer num : nums) {
-        squareNumbers.add((Integer) Math.pow(num, 2));
+    while (leftIndex <= rightIndex) {
+        Integer leftNum = (Integer) Math.pow(nums[leftIndex], 2);
+
+        Integer rightNum = (Integer) Math.pow(nums[rightIndex], 2);
+
+       if (leftNum >= rightNum) { 
+           squareNumbers[highestIndex--] = leftNum;
+
+           leftIndex++;
+       } else {
+           squareNumbers[highestIndex--] = rightNum;
+
+           rightIndex--;
+       }
     }
-
-    squareNumbers.sort();
 
     return squareNumbers;
 }
