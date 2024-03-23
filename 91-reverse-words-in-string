@@ -1,21 +1,44 @@
 public static String reverseWords(String str){
-    List<String> characters = new List<String>();
-
-    for (String word : str.split(' ')) {
-        characters.add(
-            getOneReverseWordCharacters(word)
-        );
-    }
-
-    return String.join(characters, ' ');
-}
-
-public String getOneReverseWordCharacters(String s) {
-    List<Integer> oldCharacters = s.getChars();
+    List<Integer> oldCharacters = str.getChars();
     List<Integer> newCharacters = new List<Integer>();
 
-    for(Integer i = oldCharacters.size() - 1; i >= 0; i--)
-        newCharacters.add(oldCharacters[i]);
+    for (Integer i = 0, j = 0; i < oldCharacters.size(); i++) {
+        if (oldCharacters[i] == 32) {
+            Integer k = i - 1;
 
-    return String.fromCharArray(newCharacters);
+            newCharacters.addAll(
+                getOneReverseWordCharacters(oldCharacters, j, k)
+            );
+
+            newCharacters.add(32);
+
+            j = i + 1;
+        } else if (i == oldCharacters.size() - 1) {
+            Integer k = i;
+
+            newCharacters.addAll(
+                getOneReverseWordCharacters(oldCharacters, j, k)
+            );
+        }
+    }
+
+    str = String.fromCharArray(newCharacters);
+
+    return str;
+}
+
+private List<Integer> getOneReverseWordCharacters(
+    List<Integer> oldCharacters, 
+    Integer j, 
+    Integer k
+) {
+    List<Integer> newCharacters = new List<Integer>();
+
+    while (j <= k) {
+        newCharacters.add(oldCharacters[k]);
+
+        k--;
+    }
+
+    return newCharacters;
 }
