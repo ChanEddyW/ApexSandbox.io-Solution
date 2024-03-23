@@ -1,0 +1,20 @@
+public void createCourseAndClass(String name, String description) {
+    apxio__Course__c course = new apxio__Course__c(
+        Name = name, 
+        apxio__Course_Details__c = description
+    );
+
+    if (Schema.sObjectType.apxio__Course__c.isCreateable()) {
+        insert as user course;
+    }
+
+    apxio__Class__c cls = new apxio__Class__c(
+        apxio__Course__c = course.Id, 
+        Name = name, 
+        apxio__Description__c = description?.left(255)
+    );
+
+    if (Schema.sObjectType.apxio__Class__c.isCreateable()) {
+        insert as user cls;
+    }
+}
