@@ -1,0 +1,15 @@
+public Boolean ascendingOrder(Integer a, Integer b, Integer c) {
+    Boolean inAscendingOrder;
+
+    if (
+        (a < b || a == b) 
+        && (a < c || a == c) 
+        && (b < c || b == c)
+    ) {
+        inAscendingOrder = true;
+    } else {
+        inAscendingOrder = false;
+    }
+
+    return inAscendingOrder;
+}
