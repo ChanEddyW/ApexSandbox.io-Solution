@@ -1,0 +1,22 @@
+public String aOrAn(String word) {
+    String aOrAnWord;
+
+    if (
+        word.startsWith('a') 
+        || word.startsWith('e') 
+        || word.startsWith('i') 
+        || word.startsWith('o') 
+        || word.startsWith('u') 
+        // word.left(1) == 'a' 
+        // || word.left(1) == 'e' 
+        // || word.left(1) == 'i' 
+        // || word.left(1) == 'o' 
+        // || word.left(1) == 'u' 
+    ) {
+        aOrAnWord = 'an ' + word;
+    } else {
+        aOrAnWord = 'a ' + word;
+    }
+
+    return aOrAnWord;
+}
