@@ -1,0 +1,85 @@
+public boolean isSorted(List<Integer> numbers) {
+    Boolean areSorted;
+    Boolean areSortedAsc;
+    Boolean areSortedDesc;
+
+    if (numbers.size() <= 2) {
+        areSorted = true;
+    } else if (numbers.size() > 2) {
+        areSortedAsc = validateSortedAsc(numbers);
+
+        if (areSortedAsc) {
+            areSorted = true;
+        } else {
+            areSortedDesc = validateSortedDesc(numbers);
+
+            if (areSortedDesc) {
+                areSorted = true;
+            } else {
+                areSorted = false;
+            }
+        }
+    }
+
+    return areSorted;
+}
+
+private Boolean validateSortedAsc(List<Integer> numbers) {
+    Boolean areSortedAsc;
+    Integer i;
+    Integer j;
+
+    for (Integer num : numbers) {
+        if (i == null) {
+            i = num;
+
+            continue;
+        } else if (j == null) {
+            j = num;
+        }
+
+        if (i > j) {
+            areSortedAsc = false;
+
+            break;
+        } else {
+            areSortedAsc = true;
+
+            i = j;
+
+            j = null;
+        }
+    }
+
+    return areSortedAsc;
+}
+
+private Boolean validateSortedDesc(List<Integer> numbers) {
+    Boolean areSortedDesc;
+    Integer i;
+    Integer j;
+
+    for (Integer num : numbers) {
+        if (i == null) {
+            i = num;
+
+            continue;
+        } else if (j == null) {
+            j = num;
+        }
+
+        if (i < j) {
+            areSortedDesc = false;
+
+            break;
+        } else {
+            areSortedDesc = true;
+
+            i = j;
+
+            j = null;
+        }
+    }
+
+    return areSortedDesc;
+}
