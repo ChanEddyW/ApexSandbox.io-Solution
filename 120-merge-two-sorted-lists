@@ -1,7 +1,115 @@
 public static List<Integer> mergeLists(List<Integer> list1, List<Integer> list2){
-    list1.addAll(list2);
+    List<Integer> integers = new List<Integer>();
 
-    list1.sort();
+    for (Integer i : list1) {
+        integers.add(i);
+    }
 
-    return list1;
+    for (Integer i : list2) {
+        integers.add(i);
+    }
+
+    mergeSort(integers);
+
+    return integers;
+}
+
+// O(n) linear time
+public void mergeSort(List<Integer> integers) {
+    Integer size = integers.size();
+
+    if (size < 2) {
+        return;
+    }
+
+    Integer middle = size / 2;
+    List<Integer> left = new List<Integer>();
+    List<Integer> right = new List<Integer>();
+
+    for (Integer i = 0; i < middle; i++) {
+        left.add(integers[i]);
+    }
+
+    System.debug(LoggingLevel.INFO, 'left = ' + left);
+
+    for (Integer i = middle; i < size; i++) {
+        right.add(integers[i]);
+    }
+
+    System.debug(LoggingLevel.INFO, 'right = ' + right);
+
+    mergeSort(left);
+    mergeSort(right);
+
+    mergeLeftAndRight(left, right, integers);
+}
+
+public void mergeLeftAndRight(
+    List<Integer> left, 
+    List<Integer> right, 
+    List<Integer> integers
+) {
+    Integer leftSize = left.size();
+    Integer rightSize = right.size();
+    Integer i = 0;
+    Integer j = 0;
+    Integer k = 0;
+
+    while (i < leftSize && j < rightSize) {
+        if (left[i] <= right[j]) {
+            integers[k] = left[i];
+
+            System.debug(
+                LoggingLevel.INFO, 
+                'if (left[' + i + '] <= right[' + j + '])' 
+                + ' | integers = ' + integers 
+                + ' | k = ' + k
+            );
+
+            i++;
+        } else if (left[i] > right[j]) {
+            integers[k] = right[j];
+
+            System.debug(
+                LoggingLevel.INFO, 
+                'if (left[' + i + '] > right[' + j + '])'
+                + ' | integers = ' + integers 
+                + ' | k = ' + k
+            );
+
+            j++;
+        }
+
+        k++;
+    }
+
+    while (i < leftSize) {
+        integers[k] = left[i];
+
+        System.debug(
+            LoggingLevel.INFO, 
+            'while (' + i + ' < leftSize)' 
+            + ' | integers = ' + integers 
+            + ' | k = ' + k
+        );
+
+        i++;
+        k++;
+    }
+
+    while (j < rightSize) {
+        integers[k] = right[j];
+
+        System.debug(
+            LoggingLevel.INFO, 
+            'while (' + j + ' < rightSize)' 
+            + ' | integers = ' + integers 
+            + ' | k = ' + k
+        );
+
+        j++;
+        k++;
+    }
+
+    System.debug(LoggingLevel.INFO, 'integers = ' + integers);
 }
