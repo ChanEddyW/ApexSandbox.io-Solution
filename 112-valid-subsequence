@@ -1,22 +1,22 @@
 public Boolean isSubSequence(String s1, String s2){
+    String strToCompare = '';
     Integer i = 0;
+    Integer j = 0;
 
     while (
-        s1.length() != s2.length() 
-        && i < s1.length()
+        i < s1.length() 
+        && j < s2.length() 
+        && s1 != strToCompare
     ) {
-        String s2Character = s2.substring(i, i + 1);
+        if (s1.substring(i, i + 1) == s2.substring(j, j + 1)) {
+            strToCompare += s2.substring(j, j + 1);
 
-        if (s1.substring(i, i + 1) == s2Character) {
             i++;
+            j++;
         } else {
-            s2 = s2.replaceFirst(s2Character, '');
+            j++;
         }
     }
 
-    if (s1.length() != s2.length()) {
-        s2 = s2.substring(0, s1.length());
-    }
-
-    return s1 == s2;
+    return s1 == strToCompare;
 }
