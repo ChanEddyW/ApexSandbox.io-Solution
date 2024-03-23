@@ -1,0 +1,7 @@
+public Set<Integer> setIntersection(Set<Integer> set1, Set<Integer> set2) {
+    Set<Integer> uniqueNumbers = new Set<Integer>(set1);
+
+    uniqueNumbers.retainAll(set2);
+
+    return uniqueNumbers;
+}
