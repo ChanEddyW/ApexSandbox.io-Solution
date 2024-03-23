@@ -1,0 +1,32 @@
+public Integer secondLargest(List<Integer> numbers) {
+    Integer largestNum;
+    Integer secondLargestNum;
+
+    for (Integer num : numbers) {
+        if (num > largestNum || largestNum == null) {
+            largestNum = num;
+        }
+    }
+
+    for (Integer num : numbers) {
+        if (num == largestNum) {
+            continue;
+        }
+
+        if (num > secondLargestNum || secondLargestNum == null) {
+            secondLargestNum = num;
+        }
+    }
+
+    return secondLargestNum;
+
+    // Set<Integer> uniqueNumbers = new Set<Integer>(numbers);
+
+    // numbers.clear();
+
+    // numbers.addAll(uniqueNumbers);
+
+    // numbers.sort();
+
+    // return numbers[numbers.size() - 2];
+}
