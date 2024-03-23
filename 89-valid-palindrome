@@ -1,16 +1,17 @@
 public Boolean isPalindrome(String str){
     String regExp = '[\\W]+';
+    // String regExp = '[^a-zA-Z0-9_]+';
     String replacement = '';
 
     str = str.toLowerCase().replaceAll(regExp, replacement);
 
-    for (Integer i = 0, j = str.length() - 1; i < j; i++) {
-        if (str.charAt(i) == str.charAt(j)) {
-            j--;
-        } else {
-            return false;
-        }
+    if (str.length() <= 1) {
+        return true;
     }
 
-    return true;
+    if (str.charAt(0) == str.charAt(str.length() - 1)) {
+        return isPalindrome(str.substring(1, str.length() - 1));
+    } else {
+        return false;
+    }
 }
