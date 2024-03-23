@@ -1,0 +1,33 @@
+public Integer nextPrime(Integer num) {
+    Integer nextPrimeNum;
+
+    for (Integer i = num + 1; i < Math.abs(num) + 7; i++) {
+        Boolean isPrimeNum;
+
+        if (i == 2) {
+            isPrimeNum = true;
+        } else if (i > 2) {
+            for (Integer j = i - 1; j >= 2; j--) {
+                if (Math.mod(i, j) != 0) {
+                    isPrimeNum = true;
+                } else {
+                    isPrimeNum = false;
+
+                    break;
+                }
+            }
+        } else {
+            isPrimeNum = false;
+
+            continue;
+        }
+
+        if (isPrimeNum) {
+            nextPrimeNum = i;
+
+            break;
+        }
+    }
+
+    return nextPrimeNum;
+}
