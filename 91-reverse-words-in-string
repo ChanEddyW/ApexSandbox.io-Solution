@@ -1,0 +1,13 @@
+public static String reverseWords(String str){
+    List<String> words = str.split(' ');
+
+    for (String word : words) {
+        Integer index = words.indexOf(word);
+
+        words[index] = word.reverse();
+    }
+
+    str = String.join(words, ' ');
+
+    return str;
+}
