@@ -1,0 +1,199 @@
+public class LinkedList{
+    // public class LinkedListException extends Exception {}
+
+    public Node head { get; private set; }
+    public Node tail { get; private set; }
+    public Integer size { get; private set; }
+
+    public LinkedList() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    // O(1) constant time
+    public void addToFront(Integer data) {
+        Node newNode = new Node(data);
+
+        if (this.head == null) {
+                // head = null | head.next = null
+                // tail = null | tail.next = null
+                // newNode = 1 | newNode.next = null
+
+            this.head = newNode;
+                // head = 1* | head.next = null*
+                // tail = null | tail.next = null
+                // newNode = 1 | newNode.next = null
+
+            this.tail = newNode;
+            // this.tail = this.head;
+                // head = 1 | head.next = null
+                // tail = 1* | tail.next = null*
+                // 1 > null
+                // newNode = 1 | newNode.next = null
+        } else {
+                // head = 1 | head.next = null
+                // tail = 1 | tail.next = null
+                // 1 > null
+                // newNode = 2 | newNode.next = null
+            newNode.next = this.head;
+                // head = 1 | head.next = null
+                // tail = 1 | tail.next = null
+                // newNode = 2 | newNode.next = 1*
+
+            this.head = newNode;
+                // head = 2* | head.next = 1*
+                // tail = 1 | tail.next = null
+                // 2 > 1 > null
+                // newNode = 2 | newNode.next = 1
+        }
+
+        this.size++;
+    }
+
+    // O(1) constant time
+    public Integer removeFromFront() {
+        Integer removedNode;
+
+        if (this.size == 0) {
+            System.debug(LoggingLevel.INFO, 'removeFromFront | Exception | size == 0');
+
+            // throw new LinkedListException('size == 0');
+        } else {
+                // head = 2 | head.next = 1
+                // tail = 1 | tail.next = null
+                // 2 > 1 > null
+            removedNode = this.head.data;
+                // 2
+
+            this.head = this.head.next;
+                // head = 1* | head.next = null*
+                // tail = 1 | tail.next = null
+                // 1 > null
+
+            this.size--;
+        }
+
+        return removedNode;
+            // 2
+    }
+
+    // O(1) constant time because there is a tail property
+    // If no tail, O(n) linear time
+    public void addToTail(Integer data) {
+        Node newNode = new Node(data);
+
+        if (this.head == null) {
+                // head = null | head.next = null
+                // tail = null | tail.next = null
+                // newNode = 1 | newNode.next = null
+
+            this.head = newNode;
+                // head = 1* | head.next = null*
+                // tail = null | tail.next = null
+                // newNode = 1 | newNode.next = null
+
+            this.tail = newNode;
+            // this.tail = this.head;
+                // head = 1 | head.next = null
+                // tail = 1* | tail.next = null*
+                // 1 > null
+                // newNode = 1 | newNode.next = null
+        } else {
+                // head = 1 | head.next = null
+                // tail = 1 | tail.next = null
+                // 1 > null
+                // newNode = 2 | newNode.next = null
+            this.tail.next = newNode;
+                // head = 1 | head.next = 2*
+                // tail = 1 | tail.next = 2*
+                // newNode = 2 | newNode.next = null
+
+            this.tail = newNode;
+            // this.tail = this.tail.next;
+                // head = 1 | head.next = 2
+                // tail = 2* | tail.next = null*
+                // 1 > 2 > null
+                // newNode = 2 | newNode.next = null
+        }
+
+        this.size++;
+    }
+
+    // O(n) linear time
+    public Integer removeFromTail() {
+        Integer removedNode;
+
+        if (this.size == 0) {
+            System.debug(LoggingLevel.INFO, 'removeFromFront | Exception | size == 0');
+
+            // throw new LinkedListException('size == 0');
+        } else if (this.size == 1) {
+            removedNode = this.head.data;
+
+            this.head = null;
+
+            this.size--;
+        } else {
+                // head = 1 | head.next = 2
+                // tail = 2 | tail.next = null
+                // 1 > 2 > null
+            Node newTail = null;
+                // head = 1 | head.next = 2
+                // tail = 2 | tail.next = null
+                // newTail = null* | newTail.next = null*
+
+            Node current = this.head;
+                // head = 1 | head.next = 2
+                // tail = 2 | tail.next = 
+                // newTail = null | newTail.next = null
+                // current = 1* | current.next = 2*
+
+            while (current.next != null) {
+                newTail = current;
+                    // head = 1 | head.next = 2
+                    // tail = 2 | tail.next = null
+                    // newTail = 1* | newTail.next = 2*
+                    // current = 1 | current.next = 2
+
+                current = current.next;
+                    // head = 1 | head.next = 2
+                    // tail = 2 | tail.next = null
+                    // newTail = 1 | newTail.next = 2
+                    // current = 2* | current.next = null*
+            }
+
+            removedNode = current.data;
+                // 2
+
+            newTail.next = null;
+                // head = 1 | head.next = null*
+                // tail = 2 | tail.next = null
+                // newTail = 1 | newTail.next = null*
+
+            this.tail = newTail;
+                // head = 1 | head.next = null
+                // tail = 1* | tail.next = null*
+                // 1 > null
+                // newTail = 1 | newTail.next = null
+
+            this.size--;
+        }
+
+        return removedNode;
+            // 2
+    }
+
+    public Integer size() {
+        return this.size;
+    }
+}
+
+public with sharing class Node {
+    public Integer data { get; private set; }
+    public Node next { get; set; }
+
+    public Node(Integer data) {
+        this.data = data;
+    }
+}
