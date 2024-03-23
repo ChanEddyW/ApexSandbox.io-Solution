@@ -4,32 +4,40 @@ public string countAndSay(integer N) {
         return '1';
     }
 
-    String prevSequence = countAndSay(N - 1);
+    String prevSequence = '1';
 
-    System.debug(LoggingLevel.INFO, 'prevSequence = ' + prevSequence);
+    String currSequence;
 
-    String currSequence = '';
+    for (Integer i = 2; i <= N; i++) {
+        System.debug(LoggingLevel.INFO, 'prevSequence = ' + prevSequence);
 
-    Integer count = 0;
-
-    for (Integer i = 0; i < prevSequence.length(); i++) {
         System.debug(LoggingLevel.INFO, 'i = ' + i);
 
-        count++;
+        currSequence = '';
 
-        System.debug(LoggingLevel.INFO, 'count = ' + count);
+        Integer count = 0;
 
-        if (i == prevSequence.length() - 1 || prevSequence.charAt(i) != prevSequence.charAt(i + 1)) {
-            System.debug(LoggingLevel.INFO, '(prevSequence.charAt(i) - 48) = ' + (prevSequence.charAt(i) - 48));
+        for (Integer j = 0; j < prevSequence.length(); j++) {
+            System.debug(LoggingLevel.INFO, 'j = ' + j);
 
-            currSequence += String.valueOf(count) + prevSequence.subString(i, i + 1);
-
-            System.debug(LoggingLevel.INFO, 'currSequence = ' + currSequence);
-
-            count = 0;
+            count++;
 
             System.debug(LoggingLevel.INFO, 'count = ' + count);
+
+            if (j == prevSequence.length() - 1 || prevSequence.charAt(j) != prevSequence.charAt(j + 1)) {
+                System.debug(LoggingLevel.INFO, 'prevSequence.subString(j, j + 1) = ' + prevSequence.subString(j, j + 1));
+
+                currSequence += String.valueOf(count) + prevSequence.subString(j, j + 1);
+
+                System.debug(LoggingLevel.INFO, 'currSequence = ' + currSequence);
+
+                count = 0;
+
+                System.debug(LoggingLevel.INFO, 'count = ' + count);
+            }
         }
+
+        prevSequence = currSequence;
     }
 
     return currSequence;
