@@ -1,0 +1,25 @@
+public Boolean isValid(String s){
+    final String OPENING = '({[';
+    final String CLOSING = ')}]';
+
+    List<String> characters = s.split('');
+    List<String> stack = new List<String>();
+
+    for (String character : characters) {
+        if (OPENING.indexOf(character) != -1) {
+            stack.add(character);
+        } else if (CLOSING.indexOf(character) != -1) {
+            if (stack.isEmpty()) {
+                return false;
+            }
+
+            String poppedCharacter = stack.remove(stack.size() - 1);
+
+            if (OPENING.indexOf(poppedCharacter) != CLOSING.indexOf(character)) {
+                return false;
+            }
+        }
+    }
+
+    return stack.isEmpty();
+}
