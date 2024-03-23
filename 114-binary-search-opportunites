@@ -1,0 +1,65 @@
+public static Integer search(List<Opportunity> opportunities, Integer target){
+    Integer step = 0;
+    Integer left = 0;
+    Integer right = opportunities.size();
+
+    while (left < right) {
+        step++;
+
+        Integer middle = (left + right) / 2;
+
+        if (target == opportunities[1].Amount) {
+            System.debug(
+                LoggingLevel.INFO, 
+                'left = ' + left 
+                + ' | right = ' + right 
+                + ' | middle = ' + middle 
+                + ' | opportunities[1].Amount = ' + opportunities[1].Amount 
+                + ' | target = ' + target
+            );
+
+            System.debug(LoggingLevel.INFO, 'step = ' + step);
+
+            return 1;
+        } else if (target == opportunities[middle].Amount) {
+            System.debug(
+                LoggingLevel.INFO, 
+                'left = ' + left 
+                + ' | right = ' + right 
+                + ' | middle = ' + middle 
+                + ' | opportunities[middle].Amount = ' + opportunities[middle].Amount 
+                + ' | target = ' + target
+            );
+
+            System.debug(LoggingLevel.INFO, 'step = ' + step);
+
+            return middle;
+        } else if (target < opportunities[middle].Amount) {
+            System.debug(
+                LoggingLevel.INFO, 
+                'left = ' + left 
+                + ' | right = ' + right 
+                + ' | middle = ' + middle 
+                + ' | opportunities[middle].Amount = ' + opportunities[middle].Amount 
+                + ' | target = ' + target
+            );
+
+            right = middle - 1;
+        } else {
+            System.debug(
+                LoggingLevel.INFO, 
+                'left = ' + left 
+                + ' | right = ' + right 
+                + ' | middle = ' + middle 
+                + ' | opportunities[middle].Amount = ' + opportunities[middle].Amount 
+                + ' | target = ' + target
+            );
+
+            left = middle + 1;
+        }
+    }
+
+    System.debug(LoggingLevel.INFO, 'step = ' + step);
+
+    return -1;
+}
