@@ -1,0 +1,10 @@
+public Boolean isPalindrome(String str){
+    String regExp = '[\\W]+';
+    String replacement = '';
+
+    str = str.toLowerCase().replaceAll(regExp, replacement);
+
+    String strReadBackward = str.reverse();
+
+    return str == strReadBackward;
+}
