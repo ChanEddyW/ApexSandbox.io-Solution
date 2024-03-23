@@ -1,0 +1,36 @@
+public string countAndSay(integer N) {
+    // base case
+    if (N == 1) {
+        return '1';
+    }
+
+    String prevSequence = countAndSay(N - 1);
+
+    System.debug(LoggingLevel.INFO, 'prevSequence = ' + prevSequence);
+
+    String currSequence = '';
+
+    Integer count = 0;
+
+    for (Integer i = 0; i < prevSequence.length(); i++) {
+        System.debug(LoggingLevel.INFO, 'i = ' + i);
+
+        count++;
+
+        System.debug(LoggingLevel.INFO, 'count = ' + count);
+
+        if (i == prevSequence.length() - 1 || prevSequence.charAt(i) != prevSequence.charAt(i + 1)) {
+            System.debug(LoggingLevel.INFO, '(prevSequence.charAt(i) - 48) = ' + (prevSequence.charAt(i) - 48));
+
+            currSequence += String.valueOf(count) + prevSequence.subString(i, i + 1);
+
+            System.debug(LoggingLevel.INFO, 'currSequence = ' + currSequence);
+
+            count = 0;
+
+            System.debug(LoggingLevel.INFO, 'count = ' + count);
+        }
+    }
+
+    return currSequence;
+}
