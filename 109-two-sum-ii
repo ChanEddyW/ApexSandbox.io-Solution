@@ -1,0 +1,33 @@
+public List<Integer> twoSum(List<Integer> nums, Integer target){
+    Integer leftIndex = 0;
+    Integer rightIndex = nums.size() - 1;
+
+    while (leftIndex < rightIndex) {
+        Integer sum = nums[leftIndex] + nums[rightIndex];
+
+        if (sum == target) {
+            return new List<Integer>{leftIndex, rightIndex};
+        } else if (sum < target) {
+            leftIndex++;
+        } else rightIndex--;
+    }
+
+    return new List<Integer>();
+        // O(1) constant space
+        // O(n) linear time
+
+    /**
+     * Nested for-loops will result in hitting the CPU limit, and using a Map would mean linear 
+     * space complexity. Both of these solution will fail.
+
+     * A linear solution (O(n) complexity) means that the time it takes to run should grow 
+     * linearly with the size of the input for sufficiently large inputs. A solution that uses 
+     * nested loops to compare each element with the other has O(n^2) complexity or 
+     * quadratic growth: for a list of size n, we execute the comparison logic n^2 times.
+
+     * Constant space complexity (O(1) space) means that the memory used should not 
+     * grow with the size of the input for sufficiently large inputs. If we use a Map, it means 
+     * the memory required grows linearly with the size of the array (array of size n means 
+     * possibly n entries in the Map).
+     */
+}
