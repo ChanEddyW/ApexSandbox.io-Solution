@@ -1,36 +1,48 @@
 public static Integer longestDistinctSubstring(String str, Integer k){ 
-    Integer length = str.length();
-    Integer max = -1;
+    Map<String, Integer> countByCharacter = new Map<String, Integer>();
+    Integer sum = 0;
+    Integer max = 0;
 
-    for (Integer i = 0; i < length; i++) {
-        Set<Integer> uniqueCharacters = new Set<Integer>();
+    for (String character : str.split('')) {
+        System.debug(LoggingLevel.INFO, 'character = ' + character);
 
-        System.debug(LoggingLevel.INFO, 'i = ' + i);
-
-        for (Integer j = i; j < length; j++) {
-            System.debug(LoggingLevel.INFO, 'j = ' + j);
-
-            Integer character = str.charAt(j);
-
-            System.debug(LoggingLevel.INFO, 'character = ' + character);
-
-            if (uniqueCharacters.size() == k && !uniqueCharacters.contains(character)) {
-                System.debug(LoggingLevel.INFO, '(j - i) = ' + (j - i));
-
-                max = Math.max(j - i, max);
-
-                System.debug(LoggingLevel.INFO, 'max = ' + max);
-
-                break;
-            } else {
-                uniqueCharacters.add(character);
-
-                System.debug(LoggingLevel.INFO, 'uniqueCharacters = ' + uniqueCharacters);
+        if (countByCharacter.size() == k && !countByCharacter.containsKey(character)) {
+            for (Integer count : countByCharacter.values()) {
+                sum += count;
             }
+
+            System.debug(LoggingLevel.INFO, 'sum = ' + sum);
+
+            max = Math.max(sum, max);
+            // max = (sum > max) ? sum : max;
+
+            System.debug(LoggingLevel.INFO, 'max = ' + max);
+
+            countByCharacter.clear();
+
+            countByCharacter.put(character, 1);
+
+            System.debug(LoggingLevel.INFO, 'countByCharacter = ' + countByCharacter);
+
+            sum = 0;
+            
+        } else if (countByCharacter.containsKey(character)) {
+            countByCharacter.put(character, countByCharacter.get(character) + 1);
+
+            System.debug(LoggingLevel.INFO, 'countByCharacter = ' + countByCharacter);
+        } else {
+            countByCharacter.put(character, 1);
+
+            System.debug(LoggingLevel.INFO, 'countByCharacter = ' + countByCharacter);
         }
     }
 
-    System.debug(LoggingLevel.INFO, 'length = ' + length + ' | max = ' + max);
+    for (Integer count : countByCharacter.values()) {
+        sum += count;
+    }
 
-    return (max == -1) ? length : max;
+    System.debug(LoggingLevel.INFO, 'sum = ' + sum);
+    System.debug(LoggingLevel.INFO, 'max = ' + max);
+
+    return Math.max(sum, max);
 }
