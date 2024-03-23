@@ -1,0 +1,20 @@
+public static void segregateEvenOdd(List<Integer> numbers){
+    Integer leftIndex = 0;
+    Integer rightIndex = numbers.size() - 1;
+
+    while (leftIndex < rightIndex) {
+        Integer leftNum = numbers[leftIndex];
+        Integer rightNum = numbers[rightIndex];
+
+        if (Math.mod(leftNum, 2) == 0) {
+            leftIndex++;
+        } else {
+            numbers[leftIndex] = rightNum;
+            numbers[rightIndex] = leftNum;
+        }
+
+        if (Math.mod(rightNum, 2) != 0) {
+            rightIndex--;
+        }
+    }
+}
