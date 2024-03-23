@@ -1,0 +1,26 @@
+public Id classFromCourse(String courseName) {
+    Id clsId;
+
+    List<apxio__Course__c> courses = [
+        SELECT Id 
+        FROM apxio__Course__c 
+        WHERE Name = :courseName 
+        WITH USER_MODE 
+        LIMIT 1
+    ];
+
+    if (!courses.isEmpty()) {
+        apxio__Class__c cls = new apxio__Class__c(
+            apxio__Course__c = courses[0].Id, 
+            Name = courseName
+        );
+
+        if (Schema.sObjectType.apxio__Class__c.isCreateable()) {
+            insert as user cls;
+        }
+
+        clsId = cls.Id;
+    }
+
+    return clsId;
+}
