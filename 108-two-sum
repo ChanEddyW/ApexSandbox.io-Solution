@@ -1,0 +1,17 @@
+public static List<Integer> twoSum(List<Integer> nums, Integer target) {
+    Map<Integer, Integer> indicesByDifferenceBetweenTargetAndNum = new Map<Integer, Integer>();
+
+    for (Integer i = 0; i < nums.size(); i++) {
+        if (indicesByDifferenceBetweenTargetAndNum.containsKey(nums[i])) {
+            return new List<Integer>{
+                indicesByDifferenceBetweenTargetAndNum.get(nums[i]), 
+                i
+            };
+        } else {
+            indicesByDifferenceBetweenTargetAndNum.put(target - nums[i], i);
+        }
+    }
+
+    return null;
+        // O(n) linear space and time
+}
