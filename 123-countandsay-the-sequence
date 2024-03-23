@@ -1,44 +1,55 @@
 public string countAndSay(integer N) {
-    // base case
-    if (N == 1) {
-        return '1';
-    }
+    List<String> sequences = new List<String>{'1', '11'};
 
-    String prevSequence = '1';
-
-    String currSequence;
-
-    for (Integer i = 2; i <= N; i++) {
-        System.debug(LoggingLevel.INFO, 'prevSequence = ' + prevSequence);
+    for (Integer i = 2; i < N; i++) {
+        System.debug(LoggingLevel.INFO, 'sequences = ' + sequences);
 
         System.debug(LoggingLevel.INFO, 'i = ' + i);
 
-        currSequence = '';
+        String prevSequence = sequences.get(i - 1);
+
+        System.debug(LoggingLevel.INFO, 'prevSequence = ' + prevSequence);
+
+        Integer prevDigit = prevSequence.charAt(0) - 48;
+
+        System.debug(LoggingLevel.INFO, 'prevDigit = ' + prevDigit);
+
+        String currSequence = '';
 
         Integer count = 0;
 
-        for (Integer j = 0; j < prevSequence.length(); j++) {
+        for (Integer j = 1; j <= prevSequence.length(); j++) {
             System.debug(LoggingLevel.INFO, 'j = ' + j);
 
-            count++;
+            Integer currDigit = (j < prevSequence.length()) ? prevSequence.charAt(j) - 48 : -1;
 
-            System.debug(LoggingLevel.INFO, 'count = ' + count);
+            System.debug(LoggingLevel.INFO, 'currDigit = ' + currDigit);
 
-            if (j == prevSequence.length() - 1 || prevSequence.charAt(j) != prevSequence.charAt(j + 1)) {
-                System.debug(LoggingLevel.INFO, 'prevSequence.subString(j, j + 1) = ' + prevSequence.subString(j, j + 1));
+            if (currDigit == prevDigit) {
+                count++;
 
-                currSequence += String.valueOf(count) + prevSequence.subString(j, j + 1);
+                System.debug(LoggingLevel.INFO, 'count = ' + count);
+            } else {
+                count++;
+
+                System.debug(LoggingLevel.INFO, 'count = ' + count);
+
+                currSequence += String.valueOf(count) + String.valueOf(prevDigit);
 
                 System.debug(LoggingLevel.INFO, 'currSequence = ' + currSequence);
 
                 count = 0;
 
                 System.debug(LoggingLevel.INFO, 'count = ' + count);
+
+                prevDigit = currDigit;
+
+                System.debug(LoggingLevel.INFO, 'prevDigit = ' + prevDigit);
             }
         }
 
-        prevSequence = currSequence;
+        sequences.add(currSequence);
     }
 
-    return currSequence;
+    return sequences[N - 1];
 }
