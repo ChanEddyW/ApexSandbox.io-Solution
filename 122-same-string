@@ -1,0 +1,37 @@
+public static Boolean sameString(String str1, String str2){
+    str1 = getReverseStrAfterApplyingBackspace(str1);
+    str2 = getReverseStrAfterApplyingBackspace(str2);
+
+    System.debug(LoggingLevel.INFO, '(str1 == str2) = ' + (str1 == str2));
+
+    return str1 == str2;
+}
+
+private String getReverseStrAfterApplyingBackspace(String str) {
+    String reverseStrAfterApplyingBackspace = '';
+    List<String> characters = str.split('');
+    Integer rightIndex = characters.size() - 1;
+    Integer backspaceCount = 0;
+
+    while (rightIndex >= 0) {
+        System.debug(LoggingLevel.INFO, 'rightIndex = ' + rightIndex);
+
+        if (characters[rightIndex] == '#') {
+            backspaceCount++;
+
+            System.debug(LoggingLevel.INFO, 'backspaceCount = ' + backspaceCount);
+        } else if (backspaceCount > 0) {
+            backspaceCount--;
+
+            System.debug(LoggingLevel.INFO, 'backspaceCount = ' + backspaceCount);
+        } else {
+            reverseStrAfterApplyingBackspace += characters.get(rightIndex);
+
+            System.debug(LoggingLevel.INFO, 'reverseStrAfterApplyingBackspace = ' + reverseStrAfterApplyingBackspace);
+        }
+
+        rightIndex--;
+    }
+
+    return reverseStrAfterApplyingBackspace;
+}
