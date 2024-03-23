@@ -1,0 +1,11 @@
+public Map<String, String> phonebook(List<Contact> contacts) {
+    Map<String, String> phoneNumbersByName = new Map<String, String>();
+
+    for (Contact contact: contacts) {
+        if (contact.Phone != null) {
+            phoneNumbersByName.put(contact.Name, contact.Phone);
+        }
+    }
+
+    return phoneNumbersByName;
+}
