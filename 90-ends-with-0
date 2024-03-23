@@ -1,0 +1,14 @@
+public Boolean isEndWithZero(Integer num){
+    Boolean endWithZero;
+
+    if (
+        num.format().right(1) == '0' 
+        // String.valueOf(num).right(1) == '0' 
+    ) {
+        endWithZero = true;
+    } else {
+        endWithZero = false;
+    }
+
+    return endWithZero;
+}
