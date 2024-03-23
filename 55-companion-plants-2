@@ -1,0 +1,43 @@
+public Boolean companionPlants(List<String> plants) {
+    Boolean areCompanionPlants;
+    String plant1;
+    String plant2;
+    Integer whichPlantNum = 1;
+
+    if (plants == null || plants.isEmpty()) {
+        areCompanionPlants = true;
+    } else if (plants.size() > 0 && plants.size() < 2) {
+        areCompanionPlants = false;
+    } else if (plants.size() >= 2) {
+        for (String plant : plants) {
+            if (whichPlantNum == 1) {
+                plant1 = plant;
+
+                whichPlantNum = 2;
+            } else if (whichPlantNum == 2) {
+                plant2 = plant;
+
+                whichPlantNum = 1;
+            }
+
+            if (plant1 == null || plant2 == null) {
+                continue;
+            }
+
+            if (
+                plant1 == 'lettuce' && plant2 == 'cucumbers' || plant2 == 'lettuce' && plant1 == 'cucumbers' 
+                || plant1 == 'lettuce' && plant2 == 'onions' || plant2 == 'lettuce' && plant1 == 'onions' 
+                || plant1 == 'onions' && plant2 == 'carrots' || plant2 == 'onions' && plant1 == 'carrots' 
+                || plant1 == 'onions' && plant2 == 'tomatoes' || plant2 == 'onions' && plant1 == 'tomatoes'
+            ) {
+                areCompanionPlants = true;
+            } else {
+                areCompanionPlants = false;
+
+                break;
+            }
+        }
+    }
+
+    return areCompanionPlants;
+}
