@@ -1,31 +1,44 @@
 public List<String> commonChars(List<String> strs){
-    String characters = String.join(strs, '');
+    List<Integer> commonCharacterCount = new List<Integer>(26);
 
-    Map<String, Integer> countByCharacter = new Map<String, Integer>();
+    for (Integer i = 0; i < 26; i++) {
+        commonCharacterCount[i] = 2147483647;
+    }
 
-    for (String character : characters.split('')) {
-        if (countByCharacter.containsKey(character)) {
-            Integer count = countByCharacter.get(character);
+    for (String word : strs) {
+        List<Integer> oneWordCharacterCount = new List<Integer>(26);
 
-            countByCharacter.put(character, count + 1);
-        } else {
-            countByCharacter.put(character, 1);
+        for (Integer i = 0; i < 26; i++) {
+            oneWordCharacterCount[i] = 0;
+        }
+
+        for (Integer i = 0; i < word.length(); i++) {
+            oneWordCharacterCount[word.charAt(i) - 97]++;
+        }
+
+        for (Integer i = 0; i < 26; i++) {
+            commonCharacterCount[i] = Math.min(oneWordCharacterCount[i], commonCharacterCount[i]);
         }
     }
 
     List<String> commonCharacters = new List<String>();
 
-    for (String character : countByCharacter.keySet()) {
-        Integer countDividedByNumOfWordsQuotient = countByCharacter.get(character) / strs.size();
+    for (Integer i = 0; i < 26; i++) {
+        Integer count = commonCharacterCount[i];
 
-        if (countDividedByNumOfWordsQuotient > 0) {
-            for (Integer i = 0; i < countDividedByNumOfWordsQuotient; i++) {
-                commonCharacters.add(character);
-            }
+        while (count > 0) {
+            String commonCharacter = 
+                String.fromCharArray(
+                    new List<Integer>{
+                        i + 97
+                    }
+                );
+
+            commonCharacters.add(commonCharacter);
+
+            count--;
         }
     }
-
-    commonCharacters.sort();
 
     return commonCharacters;
 }
