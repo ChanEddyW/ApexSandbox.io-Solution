@@ -1,0 +1,31 @@
+public List<String> commonChars(List<String> strs){
+    String characters = String.join(strs, '');
+
+    Map<String, Integer> countByCharacter = new Map<String, Integer>();
+
+    for (String character : characters.split('')) {
+        if (countByCharacter.containsKey(character)) {
+            Integer count = countByCharacter.get(character);
+
+            countByCharacter.put(character, count + 1);
+        } else {
+            countByCharacter.put(character, 1);
+        }
+    }
+
+    List<String> commonCharacters = new List<String>();
+
+    for (String character : countByCharacter.keySet()) {
+        Integer countDividedByNumOfWordsQuotient = countByCharacter.get(character) / strs.size();
+
+        if (countDividedByNumOfWordsQuotient > 0) {
+            for (Integer i = 0; i < countDividedByNumOfWordsQuotient; i++) {
+                commonCharacters.add(character);
+            }
+        }
+    }
+
+    commonCharacters.sort();
+
+    return commonCharacters;
+}
