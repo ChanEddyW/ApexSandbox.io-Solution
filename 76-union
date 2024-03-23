@@ -1,0 +1,8 @@
+public Set<Integer> setUnion(Set<Integer> set1, Set<Integer> set2) {
+    Set<Integer> uniqueNumbers = new Set<Integer>();
+
+    uniqueNumbers.addAll(set1);
+    uniqueNumbers.addAll(set2);
+
+    return uniqueNumbers;
+}
