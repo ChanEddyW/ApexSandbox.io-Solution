@@ -1,37 +1,49 @@
 public static Boolean sameString(String str1, String str2){
-    str1 = getReverseStrAfterApplyingBackspace(str1);
-    str2 = getReverseStrAfterApplyingBackspace(str2);
+    str1 = getStrAfterApplyingBackspace(str1);
+    str2 = getStrAfterApplyingBackspace(str2);
 
     System.debug(LoggingLevel.INFO, '(str1 == str2) = ' + (str1 == str2));
 
     return str1 == str2;
 }
 
-private String getReverseStrAfterApplyingBackspace(String str) {
-    String reverseStrAfterApplyingBackspace = '';
-    List<String> characters = str.split('');
+private String getStrAfterApplyingBackspace(String str) {
+    List<Integer> characters = str.getChars();
     Integer rightIndex = characters.size() - 1;
-    Integer backspaceCount = 0;
 
     while (rightIndex >= 0) {
         System.debug(LoggingLevel.INFO, 'rightIndex = ' + rightIndex);
 
-        if (characters[rightIndex] == '#') {
-            backspaceCount++;
+        if (characters[rightIndex] == 35) {
+            System.debug(LoggingLevel.INFO, 'characters = ' + characters);
 
-            System.debug(LoggingLevel.INFO, 'backspaceCount = ' + backspaceCount);
-        } else if (backspaceCount > 0) {
-            backspaceCount--;
+            characters.remove(rightIndex);
 
-            System.debug(LoggingLevel.INFO, 'backspaceCount = ' + backspaceCount);
+            System.debug(LoggingLevel.INFO, 'characters = ' + characters);
+
+            Integer characterToRemoveIndex = rightIndex - 1;
+
+            while (characterToRemoveIndex > 0 && characters[characterToRemoveIndex] == 35) {
+                characterToRemoveIndex--;
+            }
+
+            System.debug(LoggingLevel.INFO, 'characterToRemoveIndex = ' + characterToRemoveIndex);
+
+            if (characterToRemoveIndex >= 0) {
+                characters.remove(characterToRemoveIndex);
+
+                System.debug(LoggingLevel.INFO, 'characters = ' + characters);
+
+                rightIndex--;
+            }
+
+            rightIndex--;
         } else {
-            reverseStrAfterApplyingBackspace += characters.get(rightIndex);
-
-            System.debug(LoggingLevel.INFO, 'reverseStrAfterApplyingBackspace = ' + reverseStrAfterApplyingBackspace);
+            rightIndex--;
         }
-
-        rightIndex--;
     }
 
-    return reverseStrAfterApplyingBackspace;
+    System.debug(LoggingLevel.INFO, 'String.fromCharArray(characters) = ' + String.fromCharArray(characters));
+
+    return String.fromCharArray(characters);
 }
