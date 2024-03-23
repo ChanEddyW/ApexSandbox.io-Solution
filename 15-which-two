@@ -1,0 +1,15 @@
+public String whichTwo(Integer a, Integer b, Integer c) {
+    String alphabeticChar;
+
+    if (b + c == a) {
+        alphabeticChar = 'a';
+    } else if (a + c == b) {
+        alphabeticChar = 'b';
+    } else if (a + b == c) {
+        alphabeticChar = 'c';
+    } else {
+        alphabeticChar = '';
+    }
+
+    return alphabeticChar;
+}
