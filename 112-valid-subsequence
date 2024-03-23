@@ -1,0 +1,13 @@
+public Boolean isSubSequence(String s1, String s2){
+    Integer prevIndex = -1;
+
+    for (String character : s1.split('')) {
+        if (s2.indexOf(character) < prevIndex) {
+            return false;
+        }
+
+        prevIndex = s2.indexOf(character);
+    }
+
+    return true;
+}
