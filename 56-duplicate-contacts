@@ -1,0 +1,14 @@
+public Boolean duplicateContacts(Contact c1, Contact c2) {
+    Boolean isDuplicate;
+
+    if (
+        c1.Email != null && c2.Email != null && c1.Email.toLowerCase() == c2.Email.toLowerCase() 
+        || c1.Phone != null && c2.Phone != null && c1.Phone == c2.Phone
+    ) {
+        isDuplicate = true;
+    } else {
+        isDuplicate = false;
+    }
+
+    return isDuplicate;
+}
