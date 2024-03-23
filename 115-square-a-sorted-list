@@ -1,0 +1,11 @@
+public static List<Integer> squareList(List<Integer> nums){
+    List<Integer> squareNumbers = new List<Integer>();
+
+    for (Integer num : nums) {
+        squareNumbers.add((Integer) Math.pow(num, 2));
+    }
+
+    squareNumbers.sort();
+
+    return squareNumbers;
+}
