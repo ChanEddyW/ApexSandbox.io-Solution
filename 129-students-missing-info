@@ -1,0 +1,17 @@
+public List<apxio__Student__c> selectStudentsWithoutContactInfo() {
+    List<apxio__Student__c> studentsWithoutContactInfo = [
+        SELECT 
+            Id, 
+            Name, 
+            apxio__Phone__c, 
+            apxio__Email__c, 
+            apxio__Active__c 
+        FROM apxio__Student__c 
+        WHERE apxio__Active__c = true 
+            AND (apxio__Phone__c = null OR apxio__Email__c = null) 
+        WITH USER_MODE 
+        ORDER BY Name ASC
+    ];
+
+    return studentsWithoutContactInfo;
+}
