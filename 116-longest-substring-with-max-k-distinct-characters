@@ -1,0 +1,36 @@
+public static Integer longestDistinctSubstring(String str, Integer k){ 
+    Integer length = str.length();
+    Integer max = -1;
+
+    for (Integer i = 0; i < length; i++) {
+        Set<Integer> uniqueCharacters = new Set<Integer>();
+
+        System.debug(LoggingLevel.INFO, 'i = ' + i);
+
+        for (Integer j = i; j < length; j++) {
+            System.debug(LoggingLevel.INFO, 'j = ' + j);
+
+            Integer character = str.charAt(j);
+
+            System.debug(LoggingLevel.INFO, 'character = ' + character);
+
+            if (uniqueCharacters.size() == k && !uniqueCharacters.contains(character)) {
+                System.debug(LoggingLevel.INFO, '(j - i) = ' + (j - i));
+
+                max = Math.max(j - i, max);
+
+                System.debug(LoggingLevel.INFO, 'max = ' + max);
+
+                break;
+            } else {
+                uniqueCharacters.add(character);
+
+                System.debug(LoggingLevel.INFO, 'uniqueCharacters = ' + uniqueCharacters);
+            }
+        }
+    }
+
+    System.debug(LoggingLevel.INFO, 'length = ' + length + ' | max = ' + max);
+
+    return (max == -1) ? length : max;
+}
