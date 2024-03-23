@@ -9,9 +9,9 @@ public static Boolean sameString(String str1, String str2){
 
 private String getStrAfterApplyingBackspace(String str) {
     List<Integer> characters = str.getChars();
-    Integer rightIndex = characters.size() - 1;
+    Integer rightIndex = 0;
 
-    while (rightIndex >= 0) {
+    while (rightIndex < characters.size()) {
         System.debug(LoggingLevel.INFO, 'rightIndex = ' + rightIndex);
 
         if (characters[rightIndex] == 35) {
@@ -21,25 +21,17 @@ private String getStrAfterApplyingBackspace(String str) {
 
             System.debug(LoggingLevel.INFO, 'characters = ' + characters);
 
-            Integer characterToRemoveIndex = rightIndex - 1;
-
-            while (characterToRemoveIndex > 0 && characters[characterToRemoveIndex] == 35) {
-                characterToRemoveIndex--;
-            }
-
-            System.debug(LoggingLevel.INFO, 'characterToRemoveIndex = ' + characterToRemoveIndex);
-
-            if (characterToRemoveIndex >= 0) {
-                characters.remove(characterToRemoveIndex);
+            if (rightIndex - 1 >= 0) {
+                characters.remove(rightIndex - 1);
 
                 System.debug(LoggingLevel.INFO, 'characters = ' + characters);
 
-                rightIndex--;
+                rightIndex = (rightIndex - 1 >= 0) ? --rightIndex : 0;
             }
 
-            rightIndex--;
+            rightIndex = (rightIndex - 1 >= 0) ? --rightIndex : 0;
         } else {
-            rightIndex--;
+            rightIndex++;
         }
     }
 
