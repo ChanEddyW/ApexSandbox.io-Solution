@@ -1,0 +1,14 @@
+public Boolean isTeenager(Integer age) {
+    Boolean isTeen;
+
+    if (
+        age >= 13 
+        && age <= 19
+    ) {
+        isTeen = true;
+    } else {
+        isTeen = false;
+    }
+
+    return isTeen;
+}
