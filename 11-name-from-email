@@ -1,0 +1,22 @@
+public String nameFromEmail(String email) {
+    String firstName = 
+        capitalizeName(
+            email.substringBefore('@').substringBefore('.')
+        );
+
+    String lastName = 
+        capitalizeName(
+            email.substringBefore('@').substringAfter('.')
+        );
+
+    return firstName + ' ' + lastName;
+}
+
+private String capitalizeName(String name) {
+    String firstLetter = name.left(1).capitalize();
+    // String firstLetter = name.left(1).toUpperCase();
+
+    String nameSubstrAfterFirstLetter = name.substring(1).toLowerCase();
+
+    return firstLetter + nameSubstrAfterFirstLetter;
+}
