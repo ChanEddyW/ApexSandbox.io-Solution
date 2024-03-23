@@ -1,0 +1,26 @@
+public static Integer maxSubArraySum(List<Integer> nums, Integer target){
+    Integer maxSum = 0;
+
+    for (Integer i = 0; i < target; i++) {
+        maxSum += nums[i];
+    }
+
+    System.debug(LoggingLevel.INFO, 'maxSum = ' + maxSum);
+
+    Integer tempSum = maxSum;
+
+    for (Integer i = target; i < nums.size(); i++) {
+        System.debug(LoggingLevel.INFO, 'i = ' + i);
+
+        tempSum = (tempSum - nums[i - target]) + nums[i];
+
+        System.debug(LoggingLevel.INFO, 'tempSum = ' + tempSum);
+
+        maxSum = Math.max(maxSum, tempSum);
+
+        System.debug(LoggingLevel.INFO, 'maxSum = ' + maxSum);
+    }
+
+    return maxSum;
+        // sliding window
+}
